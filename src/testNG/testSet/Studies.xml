@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Set - Studies">
+
+    <test verbose="2" preserve-order="true" parallel="classes" thread-count="20" name="Studies">
+        <parameter name="zipEvidence" value="true"/>
+        <classes>
+            <class name="com.publicAPI.oauth2.tests.Studies.EC_8710_Studies_Add_Study_Happy_Path"> </class>
+        </classes>
+    </test>
+</suite>

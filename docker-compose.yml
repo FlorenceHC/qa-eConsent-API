@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  tests:
+    image: csanchez/maven:3.8-azulzulu-14
+    working_dir: /application
+    volumes:
+      - .:/application:cached
+    command: "mvn clean test"

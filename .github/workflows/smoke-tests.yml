@@ -1,0 +1,140 @@
+name: Smoke Tests
+run-name: ${{ github.event.schedule && format('Scheduled run at:{0}', github.event.schedule) || format('Manual run, Xray Run ID:{2}. env:{0}, server:{1}', github.event.inputs.env, github.event.inputs.server, github.event.inputs.runID) }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment'
+        type: choice
+        required: true
+        options:
+          - QA
+          - FATE
+          - UAT
+          - MIG
+      server:
+        description: 'Server'
+        type: choice
+        required: true
+        options:
+          - us
+          - de
+          - aus
+      testObservability:
+        description: 'Use BS Test Observability'
+        required: true
+        type: boolean
+        default: true
+      xray:
+        description: 'Use Jira Xray'
+        required: true
+        type: boolean
+        default: true
+      runID:
+        description: |
+          Xray Execution Run ID               
+          "new/XX-XXX" - new run/existing run
+        required: true
+        type: string
+        default: new
+      rc:
+        description: Release candidate/Send Slack Message
+          true/RC (-gha) number - sends a message (send GHA link)
+        required: true
+        type: string
+        default: false
+
+  schedule:
+    - cron: '00 11 * * 6'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test_single:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+      - name: Inject properties into browserstack.yml
+        run: |
+          echo "" > browserstack.yml
+          echo "userName: ${{ secrets.BS_USER_NAME }}" >> browserstack.yml
+          echo "accessKey: ${{ secrets.BS_ACCESS_KEY }}" >> browserstack.yml
+          echo "projectName: "eConsent API" >> browserstack.yml
+          echo "buildName: Smoke (MR) -- eConsent API - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }}" >> browserstack.yml
+          echo "framework: testng" >> browserstack.yml
+          echo "browserstackAutomation: false" >> browserstack.yml
+          echo "testObservability: ${{ github.event.inputs.testObservability }}" >> browserstack.yml
+          echo "CUSTOM_TAG_1: Manual Execution" >> browserstack.yml
+          echo "CUSTOM_TAG_2: Smoke" >> browserstack.yml
+          echo "CUSTOM_TAG_3: ${{ github.event.inputs.env }}" >> browserstack.yml 
+          echo "CUSTOM_TAG_4: ${{ github.event.inputs.server }}" >> browserstack.yml
+          if [[ ${{ github.event.inputs.xray }}  == "true"  ]]; then
+          echo "CUSTOM_TAG_5: Xray" >> browserstack.yml
+            fi 
+          cat browserstack.yml
+      - name: Inject properties into ghaData.properties
+        run: |
+          echo "" > src/main/resources/ghaData.properties
+          echo "ghaRunId = ${{ github.run_id }}" >> src/main/resources/ghaData.properties
+          cat src/main/resources/ghaData.properties  
+
+      - run: docker compose run tests mvn clean test -Dsecret_key=${{ secrets.SECRET_KEY }} -Dsurefire.suiteXmlFiles=src/testNG/Smoke_Suite.xml -Denv=${{ github.event.inputs.env }} -Dserver=${{ github.event.inputs.server }} -DtestRun=smoke -DtestRun=smoke -Drc=${{ github.event.inputs.rc }} -Dxray=${{ github.event.inputs.xray }} -DrunID=${{ github.event.inputs.runID }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Test Results - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }} - ${{ github.run_number }} - ${{ github.run_id }}
+          path: results.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Test Evidence - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }} - ${{ github.run_number }} - ${{ github.run_id }}
+          path: evidence.zip
+
+  test_matrix:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        include:
+          - env: QA
+            server:  us
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Inject properties into browserstack.yml
+        run: |
+          echo "" > browserstack.yml
+          echo "userName: ${{ secrets.BS_USER_NAME }}" >> browserstack.yml
+          echo "accessKey: ${{ secrets.BS_ACCESS_KEY }}" >> browserstack.yml
+          echo "projectName: eConsent API" >> browserstack.yml
+          echo "buildName: Regression (WE) -- eConsent API - ${{ matrix.env }}_${{ matrix.server }}" >> browserstack.yml
+          echo "framework: testng" >> browserstack.yml
+          echo "browserstackAutomation: false" >> browserstack.yml
+          echo "testObservability: true" >> browserstack.yml
+          echo "CUSTOM_TAG_1: Weekend Execution" >> browserstack.yml
+          echo "CUSTOM_TAG_2: Regression" >> browserstack.yml
+          echo "CUSTOM_TAG_3: ${{ matrix.env }}" >> browserstack.yml 
+          echo "CUSTOM_TAG_4: ${{ matrix.server }}" >> browserstack.yml
+          echo "CUSTOM_TAG_5: Xray" >> browserstack.yml
+          cat browserstack.yml
+      - name: Inject properties into ghaData.properties
+        run: |
+          echo "" > src/main/resources/ghaData.properties
+          echo "ghaRunId = ${{ github.run_id }}" >> src/main/resources/ghaData.properties
+          cat src/main/resources/ghaData.properties  
+
+      - run: docker compose run tests mvn clean test -Dsecret_key=${{ secrets.SECRET_KEY }} -Dsurefire.suiteXmlFiles=src/testNG/Regression_Suite.xml -Denv=${{ matrix.env }} -Dserver=${{ matrix.server }} -DtestRun=regression -Drc=false -Dxray=true -DrunID=new
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Test Results - ${{ matrix.env }}_${{ matrix.server }} - ${{ github.run_number }} - ${{ github.run_id }}
+          path: results.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Test Evidence - ${{ matrix.env }}_${{ matrix.server }} - ${{ github.run_number }} - ${{ github.run_id }}
+          path: evidence.zip
