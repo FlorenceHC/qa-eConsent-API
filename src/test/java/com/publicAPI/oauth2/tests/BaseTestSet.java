@@ -25,6 +25,14 @@ public class BaseTestSet {
                  description = "startSession")
     public void startSession(ITestContext context) {
 
+//        System.out.println("eConsent.api_automation@florencehc.com - Client ID: " + jasyptEncodingString(SECRET_KEY, "2D1B6CA3A8C346B2AEE99C1E0AB72149"));
+//        System.out.println("eConsent.api_automation@florencehc.com - client_secret : " + jasyptEncodingString(SECRET_KEY, "c2aa6e4a3426b53df74acaeb2fcbf7bd2e85b8711661b6124935abee8a934d51"));
+//
+//        System.out.println("eConsent.api_automation_2@florencehc.com - Client ID: " + jasyptEncodingString(SECRET_KEY, "F0CE5E5A9DD74753A62A681085132E29"));
+//        System.out.println("eConsent.api_automation_2@florencehc.com - client_secret : " + jasyptEncodingString(SECRET_KEY, "eb427211498431deebc726f33567314f0429d27aee84538aee8cf9eca540396e"));
+//
+//        Assert.fail();
+
 //        Get Suite Name from TestNG xml file
         suiteName = context.getCurrentXmlTest().getSuite().getName();
         loggerInformation(": " + suiteName + ", one \"" + ENVIRONMENT + "\" environment");

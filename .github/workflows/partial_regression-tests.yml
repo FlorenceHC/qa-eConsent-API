@@ -68,8 +68,8 @@ jobs:
           echo "" > browserstack.yml
           echo "userName: ${{ secrets.BS_USER_NAME }}" >> browserstack.yml
           echo "accessKey: ${{ secrets.BS_ACCESS_KEY }}" >> browserstack.yml
-          echo "projectName: eConsent API" >> browserstack.yml
-          echo "buildName: Partial Regression (MR) -- eConsent API - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }}" >> browserstack.yml
+          echo "projectName: eConsent Public API" >> browserstack.yml
+          echo "buildName: Partial Regression (MR) -- eConsent Public API - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }}" >> browserstack.yml
           echo "framework: testng" >> browserstack.yml
           echo "browserstackAutomation: false" >> browserstack.yml
           echo "testObservability: ${{ github.event.inputs.testObservability }}" >> browserstack.yml
@@ -91,7 +91,7 @@ jobs:
         run: |
           echo '<?xml version="1.0" encoding="UTF-8"?>' > src/testNG/Partial_Regression_Suite.xml
           echo '<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">' >> src/testNG/Partial_Regression_Suite.xml
-          echo '<suite name="Partial Regression Test Suite - eConsent API">' >> src/testNG/Partial_Regression_Suite.xml
+          echo '<suite name="Partial Regression Test Suite - eConsent Public API">' >> src/testNG/Partial_Regression_Suite.xml
           echo '<suite-files>' >> src/testNG/Partial_Regression_Suite.xml
 
           for test in $(echo ${{ github.event.inputs.testSet }} | tr "," "\n"); do

@@ -1,6 +1,6 @@
 Documentation in Progress
 # qa-file_service-API
-QA Automation Project for eConsent API
+QA Automation Project for eConsent Public API
 REST Assured - Maven - Java - TestNG - Xray framework for API Testing
 
 ____________________________________________________________
@@ -21,7 +21,7 @@ ____________________________________________________________
 
 ### Regression
 ```
-mvn clean test -Dsecret_key=*** -Dsurefire.suiteXmlFiles=src/testNG/Regression_Suite.xml -Denv=QA -Dserver=us -DtestRun=regression -Drc=false -Dxray=false -DrunID=new
+mvn clean test -Dsecret_key=*** -Dsurefire.suiteXmlFiles=src/testNG/Regression_Suite.xml -Denv=QA -Dserver=us -DtestRun=regression -Drc=true -Dxray=true -DrunID=new
 ```
 
 ### Partial regression

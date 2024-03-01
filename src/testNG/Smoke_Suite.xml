@@ -5,9 +5,7 @@
         <parameter name="deleteTeam" value="true"/>
         <classes>
 
-<!-- Files -->
-            <class name="com.publicAPI.oauth2.tests.files.GeneratePresignedUrl.PT_800_Generate_Presigned_Url_No_Body"> </class>
-            <class name="com.publicAPI.oauth2.tests.files.GeneratePresignedUrl.PT_801_Generate_Presigned_Url_Empty_Extension"> </class>
+
 
         </classes>
     </test>

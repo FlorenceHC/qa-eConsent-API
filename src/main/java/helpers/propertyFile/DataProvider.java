@@ -236,7 +236,6 @@ public class DataProvider {
         static String configPath = "src/main/resources/config.properties";
         private static final String DBASE_MAIN_LINK_PART_ONE = getProperties(configPath, "dbaseMainLink_partOne");
         private static final String DBASE_MAIN_LINK_PART_TWO = getProperties(configPath,"dbaseMainLink_partTwo");
-        private static final String DBASE_MAIN_LINK_PART_THREE = getProperties(configPath,"dbaseMainLink_partThree");
 
         private static final String USER_MAIN_LINK_PART_ONE = getProperties(configPath,"userMainLink_partOne");
         private static final String USER_MAIN_LINK_PART_TWO = getProperties(configPath,"userMainLink_partTwo");
@@ -247,7 +246,7 @@ public class DataProvider {
 
 
     public static String baseURI() {
-        return DBASE_MAIN_LINK_PART_ONE + SERVER.toLowerCase() + DBASE_MAIN_LINK_PART_TWO + ENVIRONMENT.toLowerCase() + DBASE_MAIN_LINK_PART_THREE;
+        return DBASE_MAIN_LINK_PART_ONE + ENVIRONMENT.toLowerCase()  + DBASE_MAIN_LINK_PART_TWO;
     }
 
     public static String userURI() {

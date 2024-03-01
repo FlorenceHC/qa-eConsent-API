@@ -6,7 +6,7 @@ import org.json.JSONObject;
 public class StudiesApi {
 
 
-    static String StudiesJsonPayload(String status, String[] languages, String enTitle, String esTitle, String sponsor, String principalInvestigator, String irbNumber, String nickname, String uniqueProtocolId, String cro, int studyTargetEnrollmentNumber, int studySiteTargetEnrollmentNumber, String sponsorType, boolean hasJobTitleInSignatures) {
+    public static String studiesJsonPayload(String status, String[] languages, String enTitle, String esTitle, String sponsor, String principalInvestigator, String irbNumber, String nickname, String uniqueProtocolId, String cro, int studyTargetEnrollmentNumber, int studySiteTargetEnrollmentNumber, String sponsorType, boolean hasJobTitleInSignatures) {
 
         // Create JSON Object
         JSONObject jsonObject = new JSONObject();

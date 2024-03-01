@@ -64,8 +64,8 @@ jobs:
           echo "" > browserstack.yml
           echo "userName: ${{ secrets.BS_USER_NAME }}" >> browserstack.yml
           echo "accessKey: ${{ secrets.BS_ACCESS_KEY }}" >> browserstack.yml
-          echo "projectName: "eConsent API" >> browserstack.yml
-          echo "buildName: Smoke (MR) -- eConsent API - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }}" >> browserstack.yml
+          echo "projectName: "eConsent Public API" >> browserstack.yml
+          echo "buildName: Smoke (MR) -- eConsent Public API - ${{ github.event.inputs.env }}_${{ github.event.inputs.server }}" >> browserstack.yml
           echo "framework: testng" >> browserstack.yml
           echo "browserstackAutomation: false" >> browserstack.yml
           echo "testObservability: ${{ github.event.inputs.testObservability }}" >> browserstack.yml
@@ -112,8 +112,8 @@ jobs:
           echo "" > browserstack.yml
           echo "userName: ${{ secrets.BS_USER_NAME }}" >> browserstack.yml
           echo "accessKey: ${{ secrets.BS_ACCESS_KEY }}" >> browserstack.yml
-          echo "projectName: eConsent API" >> browserstack.yml
-          echo "buildName: Regression (WE) -- eConsent API - ${{ matrix.env }}_${{ matrix.server }}" >> browserstack.yml
+          echo "projectName: eConsent Public API" >> browserstack.yml
+          echo "buildName: Regression (WE) -- eConsent Public API - ${{ matrix.env }}_${{ matrix.server }}" >> browserstack.yml
           echo "framework: testng" >> browserstack.yml
           echo "browserstackAutomation: false" >> browserstack.yml
           echo "testObservability: true" >> browserstack.yml

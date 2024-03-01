@@ -244,7 +244,7 @@ public class JiraXrayAPI {
                     Assert.fail();
                 }
 
-                String summary = testRun_summary + " --> eConsent API " + ENVIRONMENT + "_" + SERVER + " - " + time;
+                String summary = testRun_summary + " --> " + DEV_TEAM + " " + APP_NAME + " "+ ENVIRONMENT + "_" + SERVER + " - " + time;
 
                 try {
                     HttpClient httpClient = HttpClientBuilder.create().build();
@@ -700,7 +700,7 @@ public class JiraXrayAPI {
                         partial_1 = "Partial ";
                         partial_2 = " - " + suiteName;}
                     testRun_summary = partial_1 + REGRESSION_TEST_RUN_TEST_SUMMARY;
-                    testRun_description = REGRESSION_TEST_RUN_TEST_DESCRIPTION + " on " + " " + APP_NAME +  "\\\n" +  "GitHub Actions Link: [" + GHA_RUN_URL + GHA_RUN_ID + "|" + GHA_RUN_URL + GHA_RUN_ID + "]";
+                    testRun_description = REGRESSION_TEST_RUN_TEST_DESCRIPTION + " on " + " " + DEV_TEAM + " " + APP_NAME +  "\\\n" +  "GitHub Actions Link: [" + GHA_RUN_URL + GHA_RUN_ID + "|" + GHA_RUN_URL + GHA_RUN_ID + "]";
                 } else if (TEST_RUN.equals("smoke")) {
                     testRun_testPlanKey = SMOKE_TEST_PLAN_KEY;
                     testRun_summary = SMOKE_TEST_RUN_TEST_SUMMARY;
@@ -715,7 +715,7 @@ public class JiraXrayAPI {
                     Assert.fail();
                 }
 
-                String summary = testRun_summary + " --> " + APP_NAME + " " + ENVIRONMENT + "_" + SERVER + " - " + time;
+                String summary = testRun_summary + " --> " + DEV_TEAM + " " + APP_NAME + " " + ENVIRONMENT + "_" + SERVER + " - " + time;
 
                 try {
                     String info = setTestRun_Payload_info(JIRA_PROJECT_ID, testRun_user, JIRA_ISSUE_TYPE, summary, testRun_description, testRun_testPlanKey);

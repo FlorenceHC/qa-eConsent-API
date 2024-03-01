@@ -10,6 +10,7 @@ import org.testng.Assert;
 import java.io.File;
 import java.util.Arrays;
 
+import static helpers.JsonValidator.jsonSchemaValidator;
 import static helpers.TCLogger.*;
 import static helpers.propertyFile.DataProvider.*;
 import static io.restassured.RestAssured.*;
@@ -29,7 +30,7 @@ public class RestResource {
    */
   public static Response post_ApiMethod(String path, String token, Object requestBody, String contentType, int responseCode_expected, String [] responseBody_expected, boolean assertStep, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
     String baseUri = baseURI();
     loggerInformation("API Endpoint: " + baseUri + path);
@@ -43,7 +44,7 @@ public class RestResource {
     try {
       RestAssured.urlEncodingEnabled = false;
       response = given()
-              .log().all()
+//              .log().all()
               .baseUri(baseUri)
               .contentType(contentType)
               .header("Authorization", headerValue)
@@ -53,7 +54,7 @@ public class RestResource {
               .then()
               .and()
               .assertThat()
-              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
+//              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
               .extract()
               .response();
 
@@ -74,6 +75,9 @@ public class RestResource {
               Assert.fail();
             }
           }
+
+          jsonSchemaValidator(responseBody, schemaFilePath);
+
         } else {
           loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
           loggerAssert_Passed("Response Body: " + responseBody);
@@ -100,7 +104,7 @@ public class RestResource {
    */
   public static Response postContent_ApiMethod(String path, String token, File file, String contentType, int responseCode_expected, String [] responseBody_expected, boolean assertStep, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
     String baseUri = baseURI();
     loggerInformation("API Endpoint: " + baseUri + path);
@@ -110,7 +114,7 @@ public class RestResource {
     try {
       RestAssured.urlEncodingEnabled = false;
       response = given()
-              .log().all()
+//              .log().all()
               .baseUri(baseUri)
               .contentType(contentType)
               .header("Authorization", "Bearer " + token)
@@ -120,7 +124,7 @@ public class RestResource {
               .then()
               .and()
               .assertThat()
-              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
+//              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
               .extract()
               .response();
 
@@ -141,6 +145,9 @@ public class RestResource {
               Assert.fail();
             }
           }
+
+          jsonSchemaValidator(responseBody, schemaFilePath);
+
         } else {
           loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
           loggerAssert_Passed("Response Body: " + responseBody);
@@ -166,7 +173,7 @@ public class RestResource {
    */
   public static Response putContent_ApiMethod(String path, String token, File file, String contentType, int responseCode_expected, String [] responseBody_expected, boolean assertStep, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
     loggerInformation("API Endpoint: " + path);
     loggerInformation("Path: " + path);
@@ -174,7 +181,7 @@ public class RestResource {
     try {
       RestAssured.urlEncodingEnabled = false;
       response = given()
-              .log().all()
+//              .log().all()
               .baseUri(path)
               .contentType(contentType)
               .header("Authorization", "Bearer " + token)
@@ -184,7 +191,7 @@ public class RestResource {
               .then()
               .and()
               .assertThat()
-              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
+//              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
               .extract()
               .response();
 
@@ -205,13 +212,15 @@ public class RestResource {
               Assert.fail();
             }
           }
+
+          jsonSchemaValidator(responseBody, schemaFilePath);
+
         } else {
           loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
           loggerAssert_Passed("Response Body: " + responseBody);
           Assert.fail();
         }
       }
-
     } catch (Exception ex) {
       loggerStep_Failed("Unable to execute API POST Method", ex.getMessage(), true);
     }
@@ -226,7 +235,7 @@ public class RestResource {
       RestAssured.urlEncodingEnabled = false;
       if(file ==null){
         response = given()
-                .log().all()
+//                .log().all()
                 .baseUri(path)
                 .contentType(contentType)
                 .when()
@@ -239,7 +248,7 @@ public class RestResource {
       }
       else{
         response = given()
-                .log().all()
+//                .log().all()
                 .baseUri(path)
                 .contentType(contentType)
                 .multiPart("", file)
@@ -290,7 +299,7 @@ public class RestResource {
       RestAssured.urlEncodingEnabled = false;
 
       response = given()
-              .log().all()
+//              .log().all()
               .baseUri(path)
               .contentType(contentType)
               .when()
@@ -342,7 +351,7 @@ public class RestResource {
    */
   public static Response put_ApiMethod(String token, String path, Object requestBody, int responseCode_expected, String [] responseBody_expected, boolean assertStep, boolean validateJsonSchema, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
     String baseUri = baseURI();
     loggerInformation("API Endpoint: " + baseUri + path);
@@ -357,7 +366,7 @@ public class RestResource {
     try {
       response = expect()
               .given()
-              .log().all()
+//              .log().all()
               .baseUri(baseUri)
               .contentType("application/json")
               .header("Authorization", headerValue)
@@ -373,7 +382,7 @@ public class RestResource {
       int responseCode = response.statusCode();
       String responseBody = response.getBody().prettyPrint();
       if(validateJsonSchema){
-        response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(schemaFile));
+        jsonSchemaValidator(responseBody, schemaFilePath);
       }
 
       if (assertStep) {
@@ -412,7 +421,7 @@ public class RestResource {
    */
   public static Response get_ApiMethod(String path, String token, int responseCode_expected, String [] responseBody_expected, boolean assertStep, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
     String baseUri = baseURI();
     loggerInformation("API Endpoint: " + baseUri + path);
@@ -424,8 +433,8 @@ public class RestResource {
       RestAssured.urlEncodingEnabled = false;
       response = expect()
               .given()
-                      .log()
-                      .all()
+//                      .log()
+//                      .all()
                       .baseUri(baseUri)
                       .header("Authorization", headerValue)
               .when()
@@ -433,7 +442,7 @@ public class RestResource {
               .then()
               .and()
                    .assertThat()
-                   .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
+//                   .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
                    .extract()
                    .response();
       int responseCode = response.statusCode();
@@ -453,6 +462,9 @@ public class RestResource {
               Assert.fail();
             }
         }
+
+          jsonSchemaValidator(responseBody, schemaFilePath);
+
         } else {
           loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
           loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody);
@@ -478,7 +490,7 @@ public class RestResource {
    */
   public static Response patch_ApiMethod(String token, String path, Object requestBody,String contentType,int responseCode_expected, String [] responseBody_expected, boolean assertStep, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
       String baseUri = baseURI();
       loggerInformation("API Endpoint: " + baseUri + path);
@@ -497,7 +509,7 @@ public class RestResource {
                 .then()
                 .and()
                 .assertThat()
-                .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
+//                .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
                 .extract()
                 .response();
 
@@ -518,6 +530,8 @@ public class RestResource {
                 Assert.fail();
               }
             }
+
+            jsonSchemaValidator(responseBody, schemaFilePath);
 
           } else {
             loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
@@ -542,7 +556,7 @@ public class RestResource {
    */
   public static Response delete_ApiMethod(String token, String path, int responseCode_expected, String [] responseBody_expected, boolean assertStep, boolean validateJsonSchema, String JSON_Path) {
 
-    File schemaFile = new File("src/test/resources/" + JSON_Path + ".json");
+    String schemaFilePath = "src/test/resources/" + JSON_Path + ".json";
 
     String baseUri = baseURI();
     loggerInformation("API Endpoint: " + baseUri + path);
@@ -569,7 +583,7 @@ public class RestResource {
 
       if (assertStep) {
         if(validateJsonSchema){
-          response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(schemaFile));
+          jsonSchemaValidator(responseBody, schemaFilePath);
         }
 
         if (responseCode == responseCode_expected) {

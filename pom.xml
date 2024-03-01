@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.florencehc</groupId>
-    <artifactId>public-api-automation</artifactId>
+    <artifactId>qa_eConsent_Public_API</artifactId>
     <version>1.0</version>
 
     <properties>
