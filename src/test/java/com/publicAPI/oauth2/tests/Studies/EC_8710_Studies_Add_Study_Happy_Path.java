@@ -20,8 +20,8 @@ public class EC_8710_Studies_Add_Study_Happy_Path extends DataTestSet {
     @Bug(jiraTicket = "EC-8756")
     @TcID(tcId = "EC-8710")
     @Test(groups = {},
-            testName = "File service - Delete File And Associated Data",
-            description = "Test case check if can delete file and associated data",
+            testName = "Studies Add Study Happy Path",
+            description = "Test case check if Studies Add Study Happy Path works as expected",
             retryAnalyzer = TcRetry.class)
 
     public void Studies_Add_Study_Happy_Path() {
