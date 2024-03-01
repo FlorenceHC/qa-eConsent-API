@@ -3,7 +3,6 @@ package helpers;
 import com.google.gson.JsonObject;
 
 import io.restassured.RestAssured;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.Assert;
 
@@ -64,7 +63,6 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful. Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {
@@ -134,7 +132,6 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful. Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {
@@ -201,7 +198,6 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful. Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {
@@ -267,7 +263,6 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful. Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {
@@ -316,7 +311,6 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful. Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {
@@ -388,7 +382,7 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful.Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
+         
 
           for (String str : responseBody_expected) {
             if (responseBody.contains(str)) {
@@ -451,7 +445,6 @@ public class RestResource {
       if (assertStep) {
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful.Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {
@@ -519,8 +512,8 @@ public class RestResource {
         if (assertStep) {
           if (responseCode == responseCode_expected) {
             loggerAssert_Passed("Verification successful.Status Code for API POST: " + responseCode);
-            loggerAssert_Passed("Verification successful. JSON Schema is correct");
-            loggerInformation("Response Body: " + responseBody);
+           
+                  loggerInformation("Response Body: " + responseBody);
 
             for (String str : responseBody_expected) {
               if (responseBody.contains(str)) {
@@ -588,7 +581,6 @@ public class RestResource {
 
         if (responseCode == responseCode_expected) {
           loggerAssert_Passed("Verification successful.Status Code for API POST: " + responseCode);
-          loggerAssert_Passed("Verification successful. JSON Schema is correct");
           loggerInformation("Response Body: " + responseBody);
 
           for (String str : responseBody_expected) {

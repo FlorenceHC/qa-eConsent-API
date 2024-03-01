@@ -20,7 +20,6 @@ public class JsonValidator {
         try {
             JsonNode responseNode = JsonLoader.fromString(jsonResponse);
             JsonNode schemaNode = loadSchemaFromFile(schemaFilePath);
-
             return validateJsonAgainstSchema(responseNode, schemaNode);
         } catch (Exception ex) {
             loggerStep_Failed("Unable to Validate JSON Response", ex.getMessage(), false);
