@@ -6,6 +6,10 @@
         <parameter name="zipEvidence" value="true"/>
         <classes>
             <class name="com.publicAPI.oauth2.tests.Studies.EC_8710_Studies_Add_Study_Happy_Path"> </class>
+            <class name="com.publicAPI.oauth2.tests.Studies.EC__Studies_Add_Study_No_Authorization"> </class>
+            <class name="com.publicAPI.oauth2.tests.Studies.EC__Studies_Add_Study_Invalid_Authorization"> </class>
+            <class name="com.publicAPI.oauth2.tests.Studies.EC__Studies_Add_Study_No_siteId"> </class>
+            <class name="com.publicAPI.oauth2.tests.Studies.EC__Studies_Add_Study_Wrong_siteId"> </class>
         </classes>
     </test>
 </suite>
