@@ -1,5 +1,5 @@
 Documentation in Progress
-# qa-file_service-API
+# eConsent Public API
 QA Automation Project for eConsent Public API
 REST Assured - Maven - Java - TestNG - Xray framework for API Testing
 
