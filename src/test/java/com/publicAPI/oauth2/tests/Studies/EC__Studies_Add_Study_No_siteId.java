@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import static com.publicAPI.oauth2.api.applicationApi._CommonAPI.common_API_POST;
 import static com.publicAPI.oauth2.api.applicationApi.studiesAPI.StudiesApi.studiesJsonPayload;
 import static helpers.Utils.randomString_character;
-import static helpers.propertyFile.DataProvider.unauthorized_msg;
 
 
 @Listeners(TestListener.class)

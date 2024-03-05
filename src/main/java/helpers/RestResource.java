@@ -43,7 +43,7 @@ public class RestResource {
     try {
       RestAssured.urlEncodingEnabled = false;
       response = given()
-//              .log().all()
+//              .log().everything()
               .baseUri(baseUri)
               .contentType(contentType)
               .header("Authorization", headerValue)
@@ -53,7 +53,6 @@ public class RestResource {
               .then()
               .and()
               .assertThat()
-//              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
               .extract()
               .response();
 
@@ -122,7 +121,6 @@ public class RestResource {
               .then()
               .and()
               .assertThat()
-//              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
               .extract()
               .response();
 
@@ -188,7 +186,6 @@ public class RestResource {
               .then()
               .and()
               .assertThat()
-//              .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
               .extract()
               .response();
 
@@ -427,8 +424,7 @@ public class RestResource {
       RestAssured.urlEncodingEnabled = false;
       response = expect()
               .given()
-//                      .log()
-//                      .all()
+//                      .log().all()
                       .baseUri(baseUri)
                       .header("Authorization", headerValue)
               .when()
@@ -436,7 +432,6 @@ public class RestResource {
               .then()
               .and()
                    .assertThat()
-//                   .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
                    .extract()
                    .response();
       int responseCode = response.statusCode();
@@ -502,7 +497,6 @@ public class RestResource {
                 .then()
                 .and()
                 .assertThat()
-//                .body(JsonSchemaValidator.matchesJsonSchema(schemaFile))
                 .extract()
                 .response();
 
