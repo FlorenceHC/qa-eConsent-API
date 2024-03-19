@@ -68,17 +68,20 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
 
           jsonSchemaValidator(responseBody, schemaFilePath);
 
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Passed("Response Body: " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Response Body: " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Passed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
     } catch (Exception ex) {
@@ -136,17 +139,20 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
 
           jsonSchemaValidator(responseBody, schemaFilePath);
 
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Passed("Response Body: " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API PUT: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Response Body: " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Passed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
 
@@ -201,17 +207,20 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
 
           jsonSchemaValidator(responseBody, schemaFilePath);
 
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Passed("Response Body: " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API PUT: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Response Body: " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Passed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
     } catch (Exception ex) {
@@ -266,14 +275,17 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Passed("Response Body: " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API PUT: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Response Body: " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Passed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
 
@@ -314,14 +326,17 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Passed("Response Body: " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API PUT: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Response Body: " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Passed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
 
@@ -385,14 +400,17 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
           } else{
-            loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-            loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody);
-            Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API PUT: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Failed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
           }
         }
     } catch (Exception ex) {
@@ -446,17 +464,20 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
         }
 
           jsonSchemaValidator(responseBody, schemaFilePath);
 
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API PUT: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Failed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
     } catch (Exception ex) {
@@ -513,17 +534,20 @@ public class RestResource {
               if (responseBody.contains(str)) {
                 loggerAssert_Passed("Verification successful. Response Body contains: " + str);
               } else {
-                loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-                Assert.fail();
+                String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+                loggerAssert_Failed(messageContentFailed);
+                Assert.fail(messageContentFailed);
               }
             }
 
             jsonSchemaValidator(responseBody, schemaFilePath);
 
           } else {
-            loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-            loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody);
-            Assert.fail();
+            String messageContentFailed1 = "Verification unsuccessful! Status Code for API PATCH: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+            String messageContentFailed2 = "Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody;
+            loggerAssert_Failed(messageContentFailed1);
+            loggerAssert_Failed(messageContentFailed2);
+            Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
           }
         }
       } catch (Exception ex) {
@@ -581,14 +605,17 @@ public class RestResource {
             if (responseBody.contains(str)) {
               loggerAssert_Passed("Verification successful. Response Body contains: " + str);
             } else {
-              loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody);
-              Assert.fail();
+              String messageContentFailed = "Verification unsuccessful! Response Body: Expected- " + str + ", Actual- " + responseBody;
+              loggerAssert_Failed(messageContentFailed);
+              Assert.fail(messageContentFailed);
             }
           }
         } else {
-          loggerAssert_Failed("Verification unsuccessful! Status Code for API POST: Expected- " + responseCode_expected + ", Actual- " + responseCode);
-          loggerAssert_Failed("Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody);
-          Assert.fail();
+          String messageContentFailed1 = "Verification unsuccessful! Status Code for API DELETE: Expected- " + responseCode_expected + ", Actual- " + responseCode;
+          String messageContentFailed2 = "Verification unsuccessful! Response Body: Expected- " + Arrays.toString(responseBody_expected) + ", Actual- " + responseBody;
+          loggerAssert_Failed(messageContentFailed1);
+          loggerAssert_Failed(messageContentFailed2);
+          Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
         }
       }
     } catch (Exception ex) {
@@ -596,7 +623,6 @@ public class RestResource {
     }
     return response;
   }
-
 
   public static Response getBearerToken_Auth0() {
 
@@ -617,5 +643,4 @@ public class RestResource {
             .extract()
             .response();
   }
-
 }

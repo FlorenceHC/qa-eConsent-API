@@ -53,7 +53,7 @@ public class TCLogger {
         String[] getMessageCut = getMessage.split("\n");
         String getMessage0 = getMessageCut[0];
         Reporter.log(LocalDateTime.now().format(instantTime) + " *Step FAILED-->*  {color:#FF0000}" + text + " - "+ getMessage0 + "{color}",  true);
-        if(failTest){Assert.fail();}
+        if(failTest){Assert.fail(getMessage0);}
     }
 
     public static void loggerException(String text) {
