@@ -35,7 +35,7 @@ public class TokenManager {
       loggerAssert_Failed("Unable to get m2m User Token");
       loggerInformation("Integration User Token, Status Code: "  + response.statusCode());
       loggerInformation("Integration User Token, Response Body: "  + response.body());
-      Assert.fail();
+      Assert.fail("Unable to get m2m User Token");
     }else{
       loggerInformation("Integration User Token, Status Code: "  + response.statusCode());
 //      loggerInformation("Integration User Token, Response Body: "  + response.body().prettyPrint());

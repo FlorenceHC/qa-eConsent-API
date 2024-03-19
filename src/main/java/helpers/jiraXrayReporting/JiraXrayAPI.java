@@ -190,9 +190,11 @@ public class JiraXrayAPI {
                         String authToken =  responseString.replace("\"", "");
                         return authToken;
                     } else {
-                        loggerInformation("Xray Authentication Token API Failed, status: " + statusString);
-                        loggerInformation("Xray Authentication Token API Failed, response: " + response);
-                        Assert.fail();
+                        String messageContentFailed1 = "Xray Authentication Token API Failed, status: " + statusString;
+                        String messageContentFailed2 = "Xray Authentication Token API Failed, response: " + response;
+                        loggerInformation(messageContentFailed1);
+                        loggerInformation(messageContentFailed2);
+                        Assert.fail(messageContentFailed1 + " " + messageContentFailed2);
                     }
                 } catch (Exception ex) {
                     loggerStep_Failed("Xray Authentication Token Field: ", ex.getMessage(), true);
@@ -241,7 +243,7 @@ public class JiraXrayAPI {
                     loggerInformation("Test Run Summary for Test Run: " + TEST_RUN + "Not Found");
                     testRun_description = null;
                     loggerInformation("Test Run Description for Test Run: " + TEST_RUN + "Not Found");
-                    Assert.fail();
+                    Assert.fail("Unable tu set Xray TestRun");
                 }
 
                 String summary = testRun_summary + " --> " + DEV_TEAM + " " + APP_NAME + " "+ ENVIRONMENT + "_" + SERVER + " - " + time;
@@ -329,7 +331,7 @@ public class JiraXrayAPI {
             }
         }else{
             loggerInformation("Wrong Xray Run ID: " + XRAY_RUN_ID);
-            Assert.fail();
+            Assert.fail("Wrong Xray Run ID: " + XRAY_RUN_ID);
         }
     }
 
@@ -514,7 +516,7 @@ public class JiraXrayAPI {
             } else {
                 loggerInformation("Xray Get TC issued ID Status: " + statusString);
                 loggerInformation("Xray Get TC issued ID Response: " + responseString);
-                Assert.fail();
+                Assert.fail("Unable to Get Test Case Issued Id");
             }
         } catch (Exception ex) {
             loggerStep_Failed("Unable to get Xray TC issued ID: ", ex.getMessage(), true);
@@ -554,7 +556,7 @@ public class JiraXrayAPI {
             } else {
                 loggerInformation("Xray Get TC issued ID Status: " + statusString);
                 loggerInformation("Xray Get TC issued ID Response: " + responseString);
-                Assert.fail();
+                Assert.fail("Unable to Delete Test Case From Execution");
             }
         } catch (Exception ex) {
             loggerStep_Failed("Unable to get Xray TC issued ID: ", ex.getMessage(), true);
@@ -592,13 +594,13 @@ public class JiraXrayAPI {
             int statusCode = response.getStatusLine().getStatusCode();
             responseBody = EntityUtils.toString(response.getEntity());
 
-            if (statusCode == 200) {
-                loggerInformation("Multipart Post Method: " + statusCode);
-                loggerInformation("Multipart Post Method Response body: " + responseBody);
-            } else {
-                loggerInformation("Multipart Post Method Status: " + statusCode);
-                loggerInformation("Multipart Post Method  Response: " + responseBody);
-                Assert.fail();
+            String messageContentFailed = "Multipart Post Method Status: " + statusCode;
+            String messageContentFailed2 = "Multipart Post Method Response Body: " + responseBody;
+
+            loggerInformation(messageContentFailed);
+            loggerInformation(messageContentFailed2);
+            if (statusCode != 200) {
+                Assert.fail(messageContentFailed + " " + messageContentFailed2);
             }
         } catch (Exception ex) {
             loggerStep_Failed("Unable to Execute Xray Multipart Post Method: ", ex.getMessage(), false);
@@ -712,7 +714,7 @@ public class JiraXrayAPI {
                     loggerInformation("Test Run Summary for Test Run: " + TEST_RUN + "Not Found");
                     testRun_description = null;
                     loggerInformation("Test Run Description for Test Run: " + TEST_RUN + "Not Found");
-                    Assert.fail();
+                    Assert.fail("Unable to se Xray Test Set Run");
                 }
 
                 String summary = testRun_summary + " --> " + DEV_TEAM + " " + APP_NAME + " " + ENVIRONMENT + "_" + SERVER + " - " + time;
@@ -767,8 +769,7 @@ public class JiraXrayAPI {
             }
         }else{
             loggerInformation("Wrong Xray Run ID: " + XRAY_RUN_ID);
-            Assert.fail();
+            Assert.fail("Wrong Xray Run ID: " + XRAY_RUN_ID);
         }
     }
-
 }
