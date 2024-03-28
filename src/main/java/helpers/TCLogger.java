@@ -68,8 +68,13 @@ public class TCLogger {
         Reporter.log(LocalDateTime.now().format(instantTime) + "  Assert-->  " + messageContent, true);
     }
 
-    public static void loggerAssert_Failed(String messageContent) {
-        Reporter.log(LocalDateTime.now().format(instantTime) + "  *Assert FAILED-->*  {color:#FF0000}" + messageContent +"{color}", true);
+    public  static void loggerAssert_Failed(String messageContent, boolean failTest) {
+        String logFailTest = failTest ?  "  *Assert FAILED-->*  {color:#FF0000}" : "  *Assert WARNING-->* {color:##ff8c00}";
+        String[] lines = messageContent.split("--");
+        for (String line : lines) {
+            Reporter.log(LocalDateTime.now().format(instantTime) + logFailTest + line + " {color}", true);
+        }
+        if(failTest){Assert.fail(messageContent);}
     }
 
     public static void loggerPrintScreen(String ts) {
