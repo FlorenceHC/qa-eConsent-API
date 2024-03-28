@@ -49,9 +49,7 @@ public class JsonValidator {
         if (validateJsonResponse(jsonResponse, schemaFilePath)) {
             loggerAssert_Passed("JSON Schema: " + schemaFilePath + " is valid");
         } else {
-            String messageContentFailed = "JSON Schema: " + schemaFilePath + " is NOT valid";
-            loggerAssert_Failed(messageContentFailed);
-            Assert.fail(messageContentFailed);
+            loggerAssert_Failed("JSON Schema: " + schemaFilePath + " is NOT valid", true);
         }
     }
 }

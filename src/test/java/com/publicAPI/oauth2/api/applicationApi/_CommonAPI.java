@@ -19,10 +19,10 @@ public class _CommonAPI {
         if(requestBody.equals("false")) {payload = "{}";}
         else{payload = requestBody;}
 
-        return post_ApiMethod(URL, token, payload, contentType, responseCode, responseBody, true, JSON_Path);
+        return restApiMethod("POST", URL, token, payload, contentType, responseCode, responseBody, true, true, JSON_Path);
     }
 
-    public static Response common_API_GET(String URL_suffix, String token, String queryParams, int responseCode, String [] responseBody, String JSON_Path) {
+    public static Response common_API_GET(String URL_suffix, String token, String queryParams, String contentType, int responseCode, String [] responseBody, String JSON_Path) {
 
         String queryParams_ = "";
 
@@ -30,7 +30,7 @@ public class _CommonAPI {
 
         String URL = "/" + URL_suffix + queryParams_;
 
-        return get_ApiMethod(URL, token, responseCode, responseBody, true, JSON_Path);
+        return restApiMethod("GET", URL, token, responseCode, contentType, responseCode, responseBody, true, true, JSON_Path);
     }
 
     public static void common_API_PATCH(String URL_suffix, String token, String requestBody,String contentType, int responseCode, String [] responseBody, String JSON_Path){
@@ -41,10 +41,10 @@ public class _CommonAPI {
         if(requestBody.equals("false")) {payload = "{}";}
         else{payload = requestBody;}
 
-        patch_ApiMethod(token,URL,payload,contentType,responseCode,responseBody,true,JSON_Path);
+        restApiMethod("PATCH", token, URL, payload, contentType, responseCode, responseBody, true, true, JSON_Path);
     }
 
-    public static void common_API_PUT(String URL_suffix, String token, String requestBody, int responseCode, String [] responseBody, boolean validateJsonSchema,  String JSON_Path){
+    public static void common_API_PUT(String URL_suffix, String token, String requestBody, String contentType, int responseCode, String [] responseBody, boolean validateJsonSchema,  String JSON_Path){
 
         String URL = "/" + URL_suffix;
 
@@ -52,13 +52,13 @@ public class _CommonAPI {
         if(requestBody.equals("false")) {payload = "{}";}
         else{payload = requestBody;}
 
-        put_ApiMethod(token, URL, payload, responseCode, responseBody, true, validateJsonSchema, JSON_Path);
+        restApiMethod("PUT", token, URL, payload, contentType, responseCode, responseBody, true, validateJsonSchema, JSON_Path);
     }
 
-    public static void common_API_DELETE(String URL_Suffix, String token,int responseCode,String [] responseBody,boolean validateJsonSchema, String JSON_Path){
+    public static void common_API_DELETE(String URL_Suffix, String token, int responseCode, String [] responseBody, String contentType, boolean validateJsonSchema, String JSON_Path){
 
         String URL= "/" + URL_Suffix;
-        delete_ApiMethod(token,URL,responseCode,responseBody,true,validateJsonSchema,JSON_Path);
+        restApiMethod("DELETE", token, URL, responseCode, contentType, responseCode, responseBody, true, validateJsonSchema, JSON_Path);
 
     }
 
@@ -71,26 +71,11 @@ public class _CommonAPI {
         if(requestBody.equals("false")) {payload = "{}";}
         else{payload = requestBody;}
 
-        return  post_ApiMethod(URL, token, payload, contentType, responseCode, responseBody, true, JSON_Path);
-    }
-    public static Response common_API_POST_Content(String URL_suffix, String token, File file, String contentType, int responseCode, String [] responseBody, String JSON_Path){
-
-        String URL = "/" + URL_suffix;
-        return  postContent_ApiMethod(URL,token,file,contentType,responseCode,responseBody,true,JSON_Path);
-    }
-
-    public static Response common_API_PUT_Content(String URL_suffix, String token, File file, String contentType, int responseCode, String [] responseBody, String JSON_Path){
-
-        String URL = "/" + URL_suffix;
-        return  putContent_ApiMethod(URL, token, file, contentType, responseCode, responseBody, true, JSON_Path);
-    }
-    public static Response common_API_PUT_Content(String url, File file, String contentType, int responseCode, String [] responseBody){
-
-        return  putContent_ApiMethod(url, file, contentType, responseCode, responseBody, true);
+        return  restApiMethod("POST", URL, token, payload, contentType, responseCode, responseBody, true, true, JSON_Path);
     }
 
     public static int getStatus(String urlSufix, String token, int response_code, String JSON_path, boolean queryParams, String[] responseBody) {
-        Response response = common_API_GET(urlSufix, token, String.valueOf(queryParams), response_code, responseBody, JSON_path);
+        Response response = common_API_GET(urlSufix, token, String.valueOf(queryParams), "application/json", response_code, responseBody, JSON_path);
         return response.statusCode();
     }
 

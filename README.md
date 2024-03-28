@@ -21,7 +21,7 @@ ____________________________________________________________
 
 ### Regression
 ```
-mvn clean test -Dsecret_key=*** -Dsurefire.suiteXmlFiles=src/testNG/Regression_Suite.xml -Denv=QA -Dserver=us -DtestRun=regression -Drc=true -Dxray=true -DrunID=new
+mvn clean test -Dsecret_key=*** -Dsurefire.suiteXmlFiles=src/testNG/Regression_Suite.xml -Denv=QA -Dserver=us -DtestRun=regression -Drc=false -Dxray=false -DrunID=new
 ```
 
 ### Partial regression
